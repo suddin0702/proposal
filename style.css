@@ -1,0 +1,775 @@
+/* ===================================================================
+   ROMANTIC MARRIAGE PROPOSAL — MINIMAL, CLEAN & ROMANTIC
+   =================================================================== */
+
+:root {
+  --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Quicksand', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+  --font-handwritten: 'Caveat', cursive;
+
+  /* Calming Soft Romantic Palette */
+  --bg-color: #fff4f6;
+  --bg-gradient: linear-gradient(135deg, #fff2f5 0%, #fde4e8 100%);
+  
+  --rose-deep: #b3103f;
+  --rose-primary: #e63946;
+  --rose-light: #ff758f;
+  --rose-soft: #ffccd5;
+  --rose-subtle: #fff5f7;
+
+  --text-dark: #2b1118;
+  --text-muted: #6b4d57;
+  --text-white: #ffffff;
+
+  /* Clean Card Tokens */
+  --card-bg: #ffffff;
+  --card-border: #ffd5dc;
+  --card-shadow: 0 10px 30px rgba(179, 16, 63, 0.07);
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-pill: 9999px;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  font-family: var(--font-main);
+  background: var(--bg-gradient);
+  background-attachment: fixed;
+  color: var(--text-dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+}
+
+#confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Top Navigation Bar */
+.top-nav {
+  position: fixed;
+  top: 14px;
+  left: 0;
+  width: 100%;
+  padding: 0 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.top-nav * {
+  pointer-events: auto;
+}
+
+.recipient-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: var(--card-bg);
+  border: 1px solid var(--rose-soft);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--rose-deep);
+}
+
+.top-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.icon-pill-btn {
+  background: var(--card-bg);
+  border: 1px solid var(--rose-soft);
+  border-radius: var(--radius-pill);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: transform 0.15s ease, background 0.15s ease;
+  position: relative;
+}
+
+.icon-pill-btn:hover {
+  background: var(--rose-subtle);
+  transform: translateY(-1px);
+}
+
+.btn-tooltip {
+  position: absolute;
+  bottom: -24px;
+  font-size: 0.7rem;
+  background: rgba(43, 17, 24, 0.85);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+  white-space: nowrap;
+}
+
+.icon-pill-btn:hover .btn-tooltip {
+  opacity: 1;
+}
+
+/* Playful Floating Toast */
+.playful-toast {
+  position: fixed;
+  top: 65px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  color: var(--rose-deep);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--rose-soft);
+  box-shadow: 0 6px 16px rgba(179, 16, 63, 0.1);
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.playful-toast.show {
+  opacity: 1;
+}
+
+/* Main Container */
+.proposal-wrapper {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 480px;
+  padding: 70px 16px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Clean Cards */
+.stage-card {
+  position: relative;
+  width: 100%;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
+  padding: 34px 24px 28px;
+  text-align: center;
+}
+
+.stage-card.stage-active {
+  display: block;
+}
+
+.stage-card.stage-hidden {
+  display: none;
+}
+
+/* Stage Badge */
+.stage-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--rose-subtle);
+  border: 1px solid var(--rose-soft);
+  color: var(--rose-deep);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 14px;
+}
+
+.warning-badge {
+  background: #fff8e7;
+  border-color: #ffe4a0;
+  color: #996500;
+}
+
+.pleading-badge {
+  background: #fbf0ff;
+  border-color: #edd1fb;
+  color: #8327b8;
+}
+
+/* Heart & Emoji Box */
+.heart-icon-box {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+.stage-emoji-hero {
+  font-size: 2.8rem;
+  margin-bottom: 8px;
+}
+
+.giant-emoji-wrapper {
+  margin: 4px auto 10px;
+}
+
+.giant-sad-emoji {
+  font-size: 5rem;
+  line-height: 1;
+}
+
+/* Typography */
+.main-title {
+  font-family: var(--font-heading);
+  font-size: 1.9rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--rose-deep);
+  margin-bottom: 8px;
+}
+
+.sub-heading-accent {
+  font-size: 1.5rem;
+  color: var(--rose-primary);
+}
+
+.subtitle {
+  font-size: 1rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-bottom: 22px;
+}
+
+.subtitle-hinglish {
+  font-size: 1.02rem;
+  color: var(--text-dark);
+}
+
+.highlight-text {
+  font-weight: 700;
+  color: var(--rose-deep);
+}
+
+.pleading-title {
+  font-family: var(--font-heading);
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--rose-deep);
+  margin-bottom: 8px;
+}
+
+.big-question-text {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--rose-deep);
+  background: var(--rose-subtle);
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  display: inline-block;
+  border: 1px solid var(--rose-soft);
+  margin-bottom: 10px;
+}
+
+.emotional-quote {
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 22px;
+}
+
+/* Buttons */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  outline: none;
+  user-select: none;
+  position: relative;
+  transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+/* YES BUTTONS */
+.btn-yes {
+  width: 100%;
+  max-width: 320px;
+  padding: 13px 22px;
+  font-size: 1.15rem;
+  color: var(--text-white);
+  background: linear-gradient(135deg, #ff4d6d 0%, #d90429 100%);
+  box-shadow: 0 4px 12px rgba(217, 4, 41, 0.18);
+}
+
+.btn-yes:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(217, 4, 41, 0.25);
+}
+
+.btn-super-yes {
+  background: linear-gradient(135deg, #ff3366 0%, #c9184a 100%);
+  font-size: 1.2rem;
+  padding: 14px 24px;
+}
+
+/* Progressive Sizing */
+.btn-tier-1 {
+  font-size: 1.08rem;
+  padding: 12px 20px;
+}
+
+.btn-tier-2 {
+  font-size: 1.2rem;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #ff477e 0%, #d90429 100%);
+}
+
+.btn-tier-3 {
+  font-size: 1.35rem;
+  padding: 16px 26px;
+  background: linear-gradient(135deg, #ff1a53 0%, #b00020 100%);
+  border: 1px solid #ffe599;
+}
+
+.btn-tier-colossal {
+  width: 100%;
+  max-width: 360px;
+  font-size: 1.45rem;
+  font-weight: 800;
+  padding: 18px 28px;
+  background: linear-gradient(135deg, #ff0055 0%, #c9184a 100%);
+  border: 1.5px solid #ffe599;
+}
+
+/* NO BUTTON CONTAINER & SMOOTH NEARBY MOVEMENT */
+.no-btn-slot {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 44px;
+  position: relative;
+}
+
+.btn-no {
+  padding: 10px 24px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  background: #ffffff;
+  border: 1px solid var(--rose-soft);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  position: relative;
+  transition: transform 0.25s ease, background 0.15s ease;
+  z-index: 20;
+}
+
+.btn-no:hover {
+  background: #ffffff;
+  color: var(--rose-deep);
+  border-color: var(--rose-light);
+}
+
+.btn-tiny-no {
+  font-size: 0.85rem;
+  padding: 7px 18px;
+}
+
+.card-footer-hint {
+  font-size: 0.8rem;
+  color: var(--rose-deep);
+  opacity: 0.75;
+  font-weight: 600;
+}
+
+/* ============================================== */
+/* CELEBRATION SCREEN                             */
+/* ============================================== */
+.celebration-card {
+  padding: 34px 22px;
+}
+
+.celebration-hero-emojis {
+  font-size: 2.8rem;
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.confetti-badge {
+  display: inline-block;
+  background: var(--rose-subtle);
+  border: 1px solid var(--rose-soft);
+  padding: 4px 14px;
+  border-radius: var(--radius-pill);
+  font-weight: 800;
+  font-size: 0.82rem;
+  color: var(--rose-deep);
+  margin-bottom: 10px;
+}
+
+.celeb-main-heading {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--rose-deep);
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+
+.celeb-sub-heading {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--rose-primary);
+  margin-bottom: 18px;
+}
+
+.celebration-romantic-card {
+  background: var(--rose-subtle);
+  border: 1px solid var(--rose-soft);
+  border-radius: var(--radius-md);
+  padding: 18px 16px;
+  margin-bottom: 18px;
+}
+
+.celeb-sweet-text {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.45;
+  margin-bottom: 8px;
+}
+
+.divider-hearts {
+  font-size: 0.85rem;
+  color: var(--rose-light);
+  margin: 8px 0 10px;
+  letter-spacing: 2px;
+}
+
+.celeb-vow-quote {
+  font-family: var(--font-serif);
+  font-size: 1.18rem;
+  line-height: 1.4;
+  color: var(--rose-deep);
+  font-style: italic;
+}
+
+.forever-script {
+  font-family: var(--font-handwritten);
+  font-size: 1.9rem;
+  font-weight: 700;
+  display: block;
+  color: var(--rose-deep);
+}
+
+.celeb-actions-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.btn-special-promise {
+  background: #ffffff;
+  color: var(--rose-deep);
+  border: 1px solid var(--rose-soft);
+  padding: 11px 22px;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 300px;
+}
+
+.btn-special-promise:hover {
+  background: var(--rose-subtle);
+}
+
+.promise-letter-card {
+  width: 100%;
+  max-width: 360px;
+  background: #ffffff;
+  border: 1px dashed var(--rose-soft);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  position: relative;
+  text-align: left;
+}
+
+.letter-stamp {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  background: var(--rose-subtle);
+  border: 1px solid var(--rose-soft);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.promise-letter-content {
+  font-family: var(--font-heading);
+  font-size: 0.98rem;
+  line-height: 1.5;
+  color: var(--text-dark);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.letter-sign {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.my-signature {
+  font-family: var(--font-handwritten);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--rose-deep);
+  display: block;
+}
+
+.btn-love-you {
+  width: 100%;
+  max-width: 320px;
+  padding: 14px 24px;
+  font-size: 1.18rem;
+  color: white;
+  background: linear-gradient(135deg, #ff3366 0%, #c9184a 100%);
+  box-shadow: 0 4px 14px rgba(201, 24, 74, 0.2);
+}
+
+.love-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(43, 17, 24, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+}
+
+.love-popup-content {
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  padding: 26px 20px;
+  max-width: 360px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--rose-soft);
+}
+
+.love-popup-content h3 {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  color: var(--rose-deep);
+  margin-bottom: 8px;
+}
+
+.love-popup-content p {
+  font-size: 0.98rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-bottom: 16px;
+}
+
+.btn-mini-close {
+  background: var(--rose-primary);
+  color: white;
+  padding: 8px 20px;
+  font-size: 0.9rem;
+}
+
+.hidden-slide {
+  display: none !important;
+}
+
+.btn-link-subtle {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 6px 10px;
+}
+
+.btn-link-subtle:hover {
+  color: var(--rose-deep);
+}
+
+/* Modal */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(43, 17, 24, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  padding: 16px;
+}
+
+.modal-backdrop.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-card {
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  padding: 24px 20px;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--rose-soft);
+}
+
+.modal-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  color: var(--rose-deep);
+  margin-bottom: 4px;
+}
+
+.modal-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.input-field-group {
+  margin-bottom: 12px;
+  text-align: left;
+}
+
+.input-field-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 4px;
+}
+
+.input-field-group input {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid var(--rose-soft);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-main);
+  font-size: 0.92rem;
+  outline: none;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.btn-modal-save {
+  flex: 2;
+  font-size: 0.9rem;
+  padding: 10px 16px;
+}
+
+.btn-modal-cancel {
+  flex: 1;
+  font-size: 0.9rem;
+  padding: 10px 12px;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .proposal-wrapper {
+    padding: 60px 12px 20px;
+  }
+
+  .stage-card {
+    padding: 26px 14px 22px;
+  }
+
+  .main-title {
+    font-size: 1.6rem;
+  }
+
+  .sub-heading-accent {
+    font-size: 1.3rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+  }
+
+  .giant-sad-emoji {
+    font-size: 4.2rem;
+  }
+
+  .pleading-title {
+    font-size: 1.65rem;
+  }
+
+  .celeb-main-heading {
+    font-size: 1.75rem;
+  }
+}

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="A cute, romantic, and playful interactive marriage proposal website.">
+  <title>Will You Marry Me? ❤️💍</title>
+
+  <!-- Google Fonts for romantic and clean modern typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Quicksand:wght@500;600;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Sound & Personalization Control Bar -->
+  <header class="top-nav">
+
+
+    <div class="top-actions">
+      <button id="sound-btn" class="icon-pill-btn" aria-label="Toggle Sound Effects" title="Sound Effects">
+        <span id="sound-icon">🔊</span>
+        <span class="btn-tooltip">Sound On</span>
+      </button>
+      <button id="customize-btn" class="icon-pill-btn" aria-label="Change Names" title="Customize Names">
+        <span>✏️</span>
+        <span class="btn-tooltip">Names</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Floating Toast Message for playful NO clicks -->
+  <div id="playful-toast" class="playful-toast" role="status" aria-live="polite"></div>
+
+  <!-- Main Multi-stage Proposal Container -->
+  <main class="proposal-wrapper">
+
+    <!-- ============================================== -->
+    <!-- STAGE 1: THE MAIN PROPOSAL                    -->
+    <!-- ============================================== -->
+    <section id="stage-1" class="stage-card stage-active" aria-labelledby="stage-1-title">
+      <div class="stage-badge">
+        <span>💍 A Special Question</span>
+      </div>
+
+      <div class="heart-icon-box">
+        <span>💖</span>
+      </div>
+
+      <h1 id="stage-1-title" class="main-title">
+        Will you marry me? ❤️
+      </h1>
+
+      <p class="subtitle">
+        I have a very important question for you... 💍<br>
+        <span class="highlight-text">Will you be my forever?</span>
+      </p>
+
+      <div class="button-group stage-1-buttons">
+        <button id="s1-yes-btn" class="btn btn-yes" data-sound="yes">
+          YES ❤️
+        </button>
+
+        <button id="s1-abs-yes-btn" class="btn btn-yes btn-super-yes" data-sound="yes">
+          ABSOLUTELY YES 😍
+        </button>
+
+        <div class="no-btn-slot">
+          <button id="s1-no-btn" class="btn btn-no" data-sound="no" aria-label="No button">
+            NO 🙈
+          </button>
+        </div>
+      </div>
+
+      <div class="card-footer-hint">
+        <span>✨ There is only one true right answer ✨</span>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- STAGE 2: "ESE KESE NO?"                        -->
+    <!-- ============================================== -->
+    <section id="stage-2" class="stage-card stage-hidden" aria-labelledby="stage-2-title">
+      <div class="stage-badge warning-badge">
+        <span>Wait a minute... 🛑</span>
+      </div>
+
+      <div class="stage-emoji-hero">
+        <span>😭</span>
+      </div>
+
+      <h2 id="stage-2-title" class="main-title">
+        Ese kese no? 😭<br>
+        <span class="sub-heading-accent">Mai nahi maanta! ❤️</span>
+      </h2>
+
+      <p class="subtitle subtitle-hinglish">
+        Ek baar aur soch lo... 🥺<br>
+        <span class="highlight-text">Itna simple thodi hai mujhe NO bolna!</span>
+      </p>
+
+      <div class="button-group stage-2-buttons">
+        <button id="s2-yes-btn" class="btn btn-yes btn-tier-1" data-sound="yes">
+          YES ❤️
+        </button>
+
+        <button id="s2-big-yes-btn" class="btn btn-yes btn-tier-2" data-sound="yes">
+          ITTAAA BADA YES 😍
+        </button>
+
+        <button id="s2-mega-yes-btn" class="btn btn-yes btn-tier-3" data-sound="yes">
+          👑 SABSE BADA YES 💍❤️
+        </button>
+
+        <div class="no-btn-slot">
+          <button id="s2-no-btn" class="btn btn-no" data-sound="no">
+            NO 😭
+          </button>
+        </div>
+      </div>
+
+      <div class="card-footer-hint">
+        <span>💡 Hint: Sabse Bada YES looks extra shiny!</span>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- STAGE 3: THE FINAL PLEAAAASE                   -->
+    <!-- ============================================== -->
+    <section id="stage-3" class="stage-card stage-hidden" aria-labelledby="stage-3-title">
+      <div class="stage-badge pleading-badge">
+        <span>Final Appeal from My Heart 💌</span>
+      </div>
+
+      <div class="giant-emoji-wrapper">
+        <div class="giant-sad-emoji">🥺</div>
+      </div>
+
+      <h2 id="stage-3-title" class="pleading-title">
+        Pleasseeeeee 🥺👉👈
+      </h2>
+
+      <div class="final-question-box">
+        <p class="big-question-text">
+          Will you marry me? 💍❤️
+        </p>
+      </div>
+
+      <p class="subtitle emotional-quote">
+        "Please think about it one more time...<br>
+        I've already planned our imaginary wedding in my head 😭❤️"
+      </p>
+
+      <div class="button-group stage-3-buttons">
+        <button id="s3-yes-btn" class="btn btn-yes btn-tier-1" data-sound="yes">
+          YES ❤️
+        </button>
+
+        <button id="s3-big-yes-btn" class="btn btn-yes btn-tier-2" data-sound="yes">
+          ITTAAAAA BADA YEEEESSSSS 😍
+        </button>
+
+        <button id="s3-colossal-yes-btn" class="btn btn-yes btn-tier-colossal" data-sound="yes">
+          💖 SABSE BADA YES 💍❤️ 💖
+        </button>
+
+        <div class="no-btn-slot small-slot">
+          <button id="s3-no-btn" class="btn btn-no btn-tiny-no" data-sound="no">
+            NO 😭
+          </button>
+        </div>
+      </div>
+
+      <div class="card-footer-hint">
+        <span>Look how sweet that giant YES button looks! 🥺✨</span>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- STAGE 4: CELEBRATION SCREEN (SHE SAID YES!)   -->
+    <!-- ============================================== -->
+    <section id="stage-celebration" class="stage-card stage-hidden celebration-card" aria-labelledby="celeb-title">
+      <div class="celebration-hero-emojis">
+        <span>💍</span>
+        <span>❤️</span>
+      </div>
+
+      <div class="confetti-badge">
+        <span>🎉 IT'S OFFICIAL! 🎉</span>
+      </div>
+
+      <h1 id="celeb-title" class="celeb-main-heading">
+        SHE SAID YES!!! 🥹❤️
+      </h1>
+
+      <h2 class="celeb-sub-heading">
+        WE'RE GETTING MARRIED!!! 🎉💍
+      </h2>
+
+      <div class="celebration-romantic-card">
+        <p class="celeb-sweet-text">
+          "I knew it! 😭❤️<br>
+          You just made me the happiest person alive."
+        </p>
+
+        <div class="divider-hearts">
+          <span>❤️</span> • <span>💍</span> • <span>✨</span> • <span>💍</span> • <span>❤️</span>
+        </div>
+
+        <p class="celeb-vow-quote">
+          "From this moment,<br>
+          it's you and me.<br>
+          <span class="forever-script">Forever. ❤️</span>"
+        </p>
+      </div>
+
+      <!-- Romantic Interactive Action Buttons -->
+      <div class="celeb-actions-wrapper">
+        <button id="one-more-thing-btn" class="btn btn-special-promise" data-sound="chime">
+          <span>💌 One more thing... ❤️</span>
+        </button>
+
+        <!-- Revealed Letter/Promise Card -->
+        <div id="promise-letter" class="promise-letter-card hidden-slide">
+          <div class="letter-stamp">❤️</div>
+          <p class="promise-letter-content">
+            "Thank you for choosing me.<br>
+            I promise to annoy you, love you, support you,<br>
+            and stand beside you forever. You now are the <br>
+            permanent owner of the penthouse and everything beneth it. ❤️"
+          </p>
+          <div class="letter-sign">
+            With all my love,<br>
+            <span id="display-my-name" class="my-signature">Forever Yours</span>
+          </div>
+        </div>
+
+        <button id="love-you-btn" class="btn btn-love-you" data-sound="love">
+          <span>❤️ I LOVE YOU ❤️</span>
+        </button>
+
+        <div id="love-you-modal" class="love-popup hidden-slide">
+          <div class="love-popup-content">
+            <h3>Forever starts with you. ❤️</h3>
+            <p>Every second with you is a dream come true, <span id="display-her-name-modal">My Love</span>. 💍👰</p>
+            <button id="close-love-modal" class="btn btn-mini-close">Always & Forever 💕</button>
+          </div>
+        </div>
+
+        <button id="replay-btn" class="btn-link-subtle" title="Relive the proposal">
+          🔄 Replay Proposal
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Name Customizer Modal -->
+  <div id="customize-modal" class="modal-backdrop" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-labelledby="custom-modal-title">
+      <h3 id="custom-modal-title">Customize Proposal Names ❤️</h3>
+      <p class="modal-desc">Personalize this romantic website with your names:</p>
+
+      <div class="input-field-group">
+        <label for="input-her-name">Her Name (Girlfriend):</label>
+        <input type="text" id="input-her-name" placeholder="e.g. Sneha, Priya, Sarah" maxlength="40">
+      </div>
+
+      <div class="input-field-group">
+        <label for="input-my-name">Your Name:</label>
+        <input type="text" id="input-my-name" placeholder="e.g. Rohit, Alex, Aryan" maxlength="40">
+      </div>
+
+      <div class="modal-buttons">
+        <button id="save-names-btn" class="btn btn-yes btn-modal-save">Save & Update ✨</button>
+        <button id="close-modal-btn" class="btn btn-no btn-modal-cancel">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confetti Overlay for Celebration -->
+  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
