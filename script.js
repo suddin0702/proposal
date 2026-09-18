@@ -7,8 +7,8 @@
 // ==========================================
 // 💖 1. PERSONALIZATION VARIABLES
 // ==========================================
-let herName = "My Love";
-let myName = "Forever Yours";
+let herName = "Rushda😍";
+let myName = "Sarfaraz🥰";
 
 // Check URL query parameters (e.g. ?her=Sneha&me=Rohit)
 const urlParams = new URLSearchParams(window.location.search);
@@ -237,7 +237,7 @@ function moveNoButtonNearby(buttonEl) {
 function handleStage1No(btn) {
   noClicksPage1++;
 
-  if (noClicksPage1 < 3) {
+  if (noClicksPage1 < 5) {
     const msg = playfulMessagesStage1[noClicksPage1 - 1] || "Try again! 💖";
     showToast(msg);
     moveNoButtonNearby(btn);
@@ -253,7 +253,7 @@ function handleStage1No(btn) {
 function handleStage2No(btn) {
   noClicksPage2++;
 
-  if (noClicksPage2 < 3) {
+  if (noClicksPage2 < 5) {
     const msg = playfulMessagesStage2[noClicksPage2 - 1] || "Mai nahi maanunga! 🥺";
     showToast(msg);
     moveNoButtonNearby(btn);
